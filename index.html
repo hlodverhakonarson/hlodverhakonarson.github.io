@@ -1,96 +1,433 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hlöðver Skúli Hákonarson</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --nuffield-green: #0f5c4d;
+            --nuffield-green-soft: #e8f1ee;
+            --text: #1f2933;
+            --muted: #5b6570;
+            --border: #d8e1dd;
+            --background: #f8faf9;
+            --card: #ffffff;
+            --shadow: 0 14px 40px rgba(15, 92, 77, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            line-height: 1.7;
-            color: #222;
+            margin: 0;
+            font-family: "Inter", sans-serif;
+            background: linear-gradient(180deg, #f7faf8 0%, #ffffff 100%);
+            color: var(--text);
+            line-height: 1.75;
         }
-        h1 {
-            font-size: 32px;
-            margin-bottom: 5px;
+
+        .container {
+            width: min(1100px, calc(100% - 48px));
+            margin: 0 auto;
         }
-        h2 {
-            margin-top: 40px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 5px;
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+            background: rgba(248, 250, 249, 0.92);
+            border-bottom: 1px solid rgba(15, 92, 77, 0.08);
         }
-        p {
-            color: #444;
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+            gap: 20px;
         }
-        a {
-            color: #0066cc;
+
+        .brand {
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--nuffield-green);
+            letter-spacing: 0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
             text-decoration: none;
+            color: var(--muted);
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .nav-links a:hover {
+            color: var(--nuffield-green);
         }
-        .tagline {
-            color: #666;
-            margin-bottom: 20px;
+
+        .hero {
+            padding: 72px 0 44px;
         }
-        .section {
-            margin-bottom: 30px;
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--nuffield-green);
+            background: var(--nuffield-green-soft);
+            border: 1px solid rgba(15, 92, 77, 0.12);
+            padding: 8px 12px;
+            border-radius: 999px;
+            margin-bottom: 18px;
+        }
+
+        h1 {
+            margin: 0;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(3rem, 6vw, 5rem);
+            line-height: 0.95;
+            font-weight: 700;
+            color: #173c35;
+        }
+
+        .lead {
+            margin-top: 22px;
+            font-size: 1.1rem;
+            color: var(--muted);
+            max-width: 640px;
+        }
+
+        .hero-actions {
+            margin-top: 28px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+        }
+
+        .button-primary {
+            background: var(--nuffield-green);
+            color: white;
+            box-shadow: 0 10px 24px rgba(15, 92, 77, 0.2);
+        }
+
+        .button-secondary {
+            background: white;
+            color: var(--nuffield-green);
+            border: 1px solid rgba(15, 92, 77, 0.18);
+        }
+
+        .portrait-card {
+            background: var(--card);
+            border: 1px solid rgba(15, 92, 77, 0.1);
+            border-radius: 28px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .portrait-card img {
+            width: 100%;
+            display: block;
+            border-radius: 20px;
+            object-fit: cover;
+            aspect-ratio: 4 / 5;
+        }
+
+        .portrait-note {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: var(--muted);
+        }
+
+        section {
+            padding: 32px 0;
+        }
+
+        .section-card {
+            background: var(--card);
+            border: 1px solid rgba(15, 92, 77, 0.1);
+            border-radius: 28px;
+            padding: 34px;
+            box-shadow: var(--shadow);
+        }
+
+        .section-title {
+            margin: 0 0 20px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            color: var(--nuffield-green);
+            text-align: left;
+            position: relative;
+            display: inline-block;
+            padding: 10px 0;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, rgba(15, 92, 77, 0.7) 12%, rgba(15, 92, 77, 0.7) 88%, transparent 100%);
+        }
+
+        .section-title::before {
+            top: 0;
+        }
+
+        .section-title::after {
+            bottom: 0;
+        }
+
+        p {
+            margin: 0 0 16px;
+            color: var(--muted);
+        }
+
+        .research-title {
+            color: #173c35;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .grid-two {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+        }
+
+        .mini-card {
+            background: linear-gradient(180deg, #ffffff 0%, #f6faf8 100%);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 24px;
+        }
+
+        .mini-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--nuffield-green);
+            font-family: "Cormorant Garamond", serif;
+            font-size: 1.6rem;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--muted);
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            color: var(--nuffield-green);
+        }
+
+        .footer-box {
+            margin: 20px 0 60px;
+            background: var(--nuffield-green);
+            color: rgba(255, 255, 255, 0.92);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 16px 36px rgba(15, 92, 77, 0.18);
+        }
+
+        .footer-box h2 {
+            margin: 0 0 12px;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 2.2rem;
+            color: white;
+        }
+
+        .footer-box p,
+        .footer-box a {
+            color: rgba(255, 255, 255, 0.88);
+        }
+
+        @media (max-width: 900px) {
+            .hero-grid,
+            .grid-two {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero {
+                padding-top: 48px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="topbar">
+        <div class="container nav">
+            <div class="brand">Hlöðver Skúli Hákonarson</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#research">Research</a>
+                <a href="#publications">Publications</a>
+                <a href="#background">Background</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+    </div>
 
-<h1>Hlöðver Skúli Hákonarson</h1>
-<p class="tagline">Migration research • Sociology • Public policy</p>
+    <main class="container">
+        <section class="hero">
+            <div class="hero-grid">
+                <div>
+                    <div class="eyebrow">Migration research • Quantitative sociology • Public policy</div>
+                    <h1>Research on migration, integration, and inequality.</h1>
+                    <p class="lead">
+                        I am an incoming DPhil student in Sociology at the University of Oxford. My work examines how legal status and institutional conditions shape migrants’ integration trajectories, using large-scale administrative data and causal inference methods.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#research">View research</a>
+                        <a class="button button-secondary" href="#publications">Selected publications</a>
+                    </div>
+                </div>
+                <div class="portrait-card">
+                    <img src="profile.jpg" alt="Portrait of Hlöðver Skúli Hákonarson">
+                    <div class="portrait-note">Replace this file with your uploaded image named <strong>profile.jpg</strong>.</div>
+                </div>
+            </div>
+        </section>
 
-<div class="section">
-<h2>About</h2>
-<p>
-I am an incoming DPhil candidate in Sociology at the University of Oxford. My research focuses on migration, integration, and inequality, with a particular emphasis on how institutional conditions shape life-course trajectories.
-</p>
-<p>
-I apply causal inference methods and use large-scale administrative data. I am especially interested in how early legal status and institutional uncertainty affect migrants’ long-term outcomes.
-</p>
-</div>
+        <section id="about">
+            <div class="section-card">
+                <h2 class="section-title">About</h2>
+                <p>
+                    My research sits at the intersection of sociology, migration studies, and public policy. I am particularly interested in how institutions shape inequality over the life course, and how abrupt policy changes can create measurable differences in migrants’ access to work, welfare, and long-term social integration.
+                </p>
+                <p>
+                    Before Oxford, I worked across academic and policy settings including the OECD, EFTA, the University of Iceland, and the Icelandic public sector. Across these roles, I developed a strong interest in combining rigorous empirical methods with questions that matter for contemporary migration governance.
+                </p>
+            </div>
+        </section>
 
-<div class="section">
-<h2>Research</h2>
-<p><strong>Legal Certainty and Early Integration: Causal Evidence from a Migration Shock in Iceland</strong></p>
-<p>
-</p>
-<p>
-Using population-wide administrative data and quasi-experimental methods, my DPhil project estimates the causal effects of early institutional conditions on employment, welfare dependence, and longer-term integration trajectories.
-</p>
-</div>
+        <section id="research">
+            <div class="section-card">
+                <h2 class="section-title">Research</h2>
+                <div class="research-title">Legal Certainty and Early Integration: Causal Evidence from a Migration Shock in Iceland</div>
+                <p>
+                    This project examines how the timing and certainty of legal status acquisition affect migrants’ labour market and socio-economic integration. It exploits a short-lived change in asylum policy in Iceland that created sharp differences in legal certainty across closely spaced arrival cohorts.
+                </p>
+                <p>
+                    Using population-wide administrative data and quasi-experimental methods, the project estimates the causal effects of early institutional conditions on employment, welfare dependence, and longer-term integration trajectories.
+                </p>
+                <div class="grid-two" style="margin-top: 22px;">
+                    <div class="mini-card">
+                        <h3>Substantive interests</h3>
+                        <ul>
+                            <li>Migration and integration</li>
+                            <li>Social stratification and inequality</li>
+                            <li>Welfare states and institutional design</li>
+                            <li>Population change in small societies</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card">
+                        <h3>Methods</h3>
+                        <ul>
+                            <li>Longitudinal administrative data</li>
+                            <li>Difference-in-differences</li>
+                            <li>Event-study designs</li>
+                            <li>Event-history analysis</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="section">
-<h2>Publications</h2>
-<ul>
-<li>
-Skills and Labour Market Integration of Immigrants and their Children in Iceland (2024), OECD Publishing.
-</li>
-<li>
-An integrated approach to service delivery for people with multiple and complex needs (2024), OECD Working Papers.
-</li>
-</ul>
-</div>
+        <section id="publications">
+            <div class="section-card">
+                <h2 class="section-title">Publications</h2>
+                <ul>
+                    <li>
+                        <a href="https://doi.org/10.1787/96adc300-en" target="_blank" rel="noopener noreferrer">Skills and Labour Market Integration of Immigrants and their Children in Iceland</a> (2024), OECD Publishing.
+                    </li>
+                    <li>
+                        <a href="https://doi.org/10.1787/d837a06a-en" target="_blank" rel="noopener noreferrer">An integrated approach to service delivery for people with multiple and complex needs</a> (2024), OECD Social, Employment and Migration Working Papers.
+                    </li>
+                </ul>
+            </div>
+        </section>
 
-<div class="section">
-<h2>Background</h2>
-<p>
-I have worked across academic and policy settings, including the OECD, EFTA, and the University of Iceland. My work has focused on migration policy, labour market integration, and applied quantitative research.
-</p>
-<p>
-I hold a Master’s degree in European Affairs (cum laude) from Sciences Po and a BA in Philosophy from the University of Iceland.
-</p>
-</div>
+        <section id="background">
+            <div class="section-card">
+                <h2 class="section-title">Background</h2>
+                <div class="grid-two">
+                    <div class="mini-card">
+                        <h3>Education</h3>
+                        <ul>
+                            <li>Incoming DPhil in Sociology, University of Oxford</li>
+                            <li>Master in European Affairs / Public Policy, Sciences Po, cum laude</li>
+                            <li>BA in Philosophy, University of Iceland</li>
+                        </ul>
+                    </div>
+                    <div class="mini-card">
+                        <h3>Experience</h3>
+                        <ul>
+                            <li>OECD: migration and social policy research</li>
+                            <li>University of Iceland: register-data research on migrant integration</li>
+                            <li>EFTA and Icelandic public sector: policy analysis and applied research</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<div class="section">
-<h2>Contact</h2>
-<p>Email: hlodverskuli.hakonarson@sciencespo.fr</p>
-</div>
-
+        <section id="contact">
+            <div class="footer-box">
+                <h2>Contact</h2>
+                <p>Email: <a href="mailto:hlodverskuli.hakonarson@sciencespo.fr">hlodverskuli.hakonarson@sciencespo.fr</a></p>
+                <p>Reykjavík / Oxford</p>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
